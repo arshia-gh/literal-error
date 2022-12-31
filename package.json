@@ -1,51 +1,63 @@
 {
-  "name": "literal-error",
-  "version": "0.1.0-alpha.1",
-  "description": "Create strongly typed errors with ease",
-  "main": "./build/cjs/index.js",
-  "types": "./build/cjs/types/index.d.ts",
-  "scripts": {
-    "clean": "rimraf ./build",
-    "build:esm": "tsc --p ./tsconfig.esm.json",
-    "build:cjs": "tsc --p ./tsconfig.cjs.json",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "prepack": "npm run build"
-  },
-  "keywords": [
-    "typescript",
-    "ts",
-    "error",
-    "literal-error",
-    "literal"
-  ],
-  "files": [
-    "build/**/*"
-  ],
-  "author": "arshia-gh",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^29.2.5",
-    "jest": "^29.3.1",
-    "node-dev": "^8.0.0",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arshia-gh/literal-error.git"
-  },
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/esm/types/index.d.ts",
-        "default": "./build/esm/types/index.mjs"
-      },
-      "require": {
-        "types": "./build/cjs/types/index.d.ts",
-        "default": "./build/cjs/types/index.js"
-      }
+    "name": "literal-error",
+    "version": "0.1.0-alpha.1",
+    "description": "Create strongly typed errors with ease",
+    "main": "./build/cjs/index.js",
+    "types": "./build/cjs/types/index.d.ts",
+    "scripts": {
+        "clean": "rimraf ./build",
+        "build:esm": "tsc --p ./tsconfig.esm.json",
+        "build:cjs": "tsc --p ./tsconfig.cjs.json",
+        "build": "npm run clean && npm run build:esm && npm run build:cjs",
+        "prepack": "npm run build",
+        "prepare": "husky install"
+    },
+    "keywords": [
+        "typescript",
+        "ts",
+        "error",
+        "literal-error",
+        "literal"
+    ],
+    "files": [
+        "build/**/*"
+    ],
+    "author": "arshia-gh",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^29.2.5",
+        "@typescript-eslint/eslint-plugin": "^5.47.1",
+        "@typescript-eslint/parser": "^5.47.1",
+        "eslint": "^8.31.0",
+        "eslint-config-prettier": "^8.5.0",
+        "husky": "^8.0.2",
+        "jest": "^29.3.1",
+        "lint-staged": "^13.1.0",
+        "node-dev": "^8.0.0",
+        "prettier": "^2.8.1",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^29.0.3",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/arshia-gh/literal-error.git"
+    },
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./build/esm/types/index.d.ts",
+                "default": "./build/esm/types/index.mjs"
+            },
+            "require": {
+                "types": "./build/cjs/types/index.d.ts",
+                "default": "./build/cjs/types/index.js"
+            }
+        }
+    },
+    "lint-staged": {
+        "*.ts": "eslint --cache --fix",
+        "*.{ts,json,md}": "prettier --write"
     }
-  }
 }
