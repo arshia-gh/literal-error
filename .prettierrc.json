@@ -1,0 +1,13 @@
+{
+    "arrowParens": "always",
+    "editorconfig": true,
+    "quoteProps": "as-needed",
+    "printWidth": 90,
+    "endOfLine": "lf",
+    "proseWrap": "always",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "all",
+    "useTabs": false
+}
