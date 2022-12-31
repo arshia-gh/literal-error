@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "noImplicitReturns": true,
+        "noEmitOnError": true,
+        "keyofStringsOnly": true,
+        "useUnknownInCatchVariables": true,
+        "exactOptionalPropertyTypes": true,
+        "strictPropertyInitialization": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "declarationMap": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "files": [
+        "../src/index.ts"
+    ]
+}
