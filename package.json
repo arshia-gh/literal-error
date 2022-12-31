@@ -6,8 +6,8 @@
   "types": "./build/cjs/types/index.d.ts",
   "scripts": {
     "clean": "rimraf ./build",
-    "build:esm": "tsc --p ./configs/tsconfig.esm.json",
-    "build:cjs": "tsc --p ./configs/tsconfig.cjs.json",
+    "build:esm": "tsc --p ./tsconfig.esm.json",
+    "build:cjs": "tsc --p ./tsconfig.cjs.json",
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
     "prepack": "npm run build"
   },
