@@ -13,7 +13,5 @@
         "declarationMap": true,
         "allowSyntheticDefaultImports": true
     },
-    "files": [
-        "../src/index.ts"
-    ]
+    "files": ["./src/index.ts"]
 }
