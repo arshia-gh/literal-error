@@ -59,17 +59,29 @@ export type Throws = {
     ): UnsafeFunction<typeof task, typeof throwables>;
 };
 
-export const throws: Throws = <Args extends [], Return>(
-    task: (...args: Args) => Return,
-    ...throwables: Err[]
-) => {
-    return (...args: Args) => {
+export type ThrowsFunction = <Task extends AnyFunction, Throwables extends Err[]>(
+    task: Task,
+    ...throwables: Throwables
+) => UnsafeFunction<Task, Throwables>;
+
+export const throws: ThrowsFunction = <
+    Task extends AnyFunction,
+    Throwables extends Err[],
+>(
+        task: Task,
+        ...throwables: Throwables
+    ) => {
+    return (...args: Parameters<Task>) => {
         try {
             return task(...args);
         } catch (error) {
+            // TODO: use a user defined comapre function or compare references instead
+            const found = throwables.find((throwable) =>
+                compareThrowable(error, throwable),
+            );
             return {
-                throwable: throwables.find((throwable) => throwable === error),
-                __isMarkedByThrows: true,
+                throwable: found,
+                __isMarkedByThrows: found != null,
             };
         }
     };
