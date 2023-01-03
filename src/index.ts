@@ -34,31 +34,6 @@ export type GetCaughtErrors<Result extends UnsafeResult> = Extract<Result, Caugh
 export type GetThrowables<Result extends UnsafeResult> =
     GetCaughtErrors<Result>['throwable'];
 
-export type Throws = {
-    <Task extends AnyFunction, E1 extends Err>(
-        task: Task,
-        ...throwables: [E1]
-    ): UnsafeFunction<typeof task, typeof throwables>;
-    <Task extends AnyFunction, E1 extends Err, E2 extends Err>(
-        task: Task,
-        ...throwables: [E1, E2]
-    ): UnsafeFunction<typeof task, typeof throwables>;
-    <Task extends AnyFunction, E1 extends Err, E2 extends Err, E3 extends Err>(
-        task: Task,
-        ...throwables: [E1, E2, E3]
-    ): UnsafeFunction<typeof task, typeof throwables>;
-    <
-        Task extends AnyFunction,
-        E1 extends Err,
-        E2 extends Err,
-        E3 extends Err,
-        E4 extends Err,
-    >(
-        task: Task,
-        ...throwables: [E1, E2, E3, E4]
-    ): UnsafeFunction<typeof task, typeof throwables>;
-};
-
 export type ThrowsFunction = <Task extends AnyFunction, Throwables extends Err[]>(
     task: Task,
     ...throwables: Throwables
