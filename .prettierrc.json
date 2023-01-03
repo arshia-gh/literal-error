@@ -1,6 +1,5 @@
 {
     "arrowParens": "always",
-    "editorconfig": true,
     "quoteProps": "as-needed",
     "printWidth": 90,
     "endOfLine": "lf",
