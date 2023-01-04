@@ -5,6 +5,8 @@ import {
     UnsafeResult,
     AnyFunction,
     Err,
+    CatchFunction,
+    TryFunction,
 } from './types';
 
 export const throws: ThrowsFunction = <
@@ -30,62 +32,15 @@ export const throws: ThrowsFunction = <
     };
 };
 
-export const Catch = <E extends Err, Return>(
+export const Catch: CatchFunction = <E extends Err, R>(
     err: E,
-    callback: (err: E) => Return,
-): CatchMetadata<E, Return> => {
+    callback: (err: E) => R,
+): CatchMetadata<E, R> => {
     return {
         __isCatchMetadata: true,
         callback,
         throwable: err,
     };
-};
-
-export type TryFunction = {
-    <E1 extends Err, E1Result, Result>(
-        result: UnsafeResult<Result, [E1]>,
-        ...catchFunctions: [CatchMetadata<E1, E1Result>]
-    ): Result | E1Result;
-    <E1 extends Err, E1Result, E2 extends Err, E2Result, Result>(
-        result: UnsafeResult<Result, [E1, E2]>,
-        ...catchFunctions: [CatchMetadata<E1, E1Result>, CatchMetadata<E2, E2Result>]
-    ): Result | E1Result | E2Result;
-    <
-        E1 extends Err,
-        E1Result,
-        E2 extends Err,
-        E2Result,
-        E3 extends Err,
-        E3Result,
-        Result,
-    >(
-        result: UnsafeResult<Result, [E1, E2, E3]>,
-        ...catchFunctions: [
-            CatchMetadata<E1, E1Result>,
-            CatchMetadata<E2, E2Result>,
-            CatchMetadata<E3, E3Result>,
-        ]
-    ): Result | E1Result | E2Result | E3Result;
-
-    <
-        E1 extends Err,
-        E1Result,
-        E2 extends Err,
-        E2Result,
-        E3 extends Err,
-        E3Result,
-        E4 extends Err,
-        E4Result,
-        Result,
-    >(
-        result: UnsafeResult<Result, [E1, E2, E3, E4]>,
-        ...catchFunctions: [
-            CatchMetadata<E1, E1Result>,
-            CatchMetadata<E2, E2Result>,
-            CatchMetadata<E3, E3Result>,
-            CatchMetadata<E4, E4Result>,
-        ]
-    ): Result | E1Result | E2Result | E3Result | E4Result;
 };
 
 export const isThrownError = (result: UnsafeResult): result is CaughtError => {
