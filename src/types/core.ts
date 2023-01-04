@@ -5,26 +5,25 @@ export type CaughtError<E extends Err = Err> = {
     __isMarkedByThrows: boolean;
 };
 
-export type CatchFunction = <E extends Err, R>(
-    err: E,
-    callback: (err: E) => R,
-) => CatchMetadata<E, R>;
-
 export type CatchMetadata<E extends Err = Err, R = any> = {
     throwable: E;
     callback: (err: E) => R;
     __isCatchMetadata: true;
 };
 
+export type UnsafeResult<Type = any, Throwables extends Err[] = Err[]> =
+    | Type
+    | CaughtError<Throwables[number]>;
+
 export type UnsafeFunction<
     Task extends AnyFunction = AnyFunction,
     Throwables extends Err[] = Err[],
 > = (...args: Parameters<Task>) => UnsafeResult<ReturnType<Task>, Throwables>;
 
-export type UnsafeResult<Type = any, Throwables extends Err[] = Err[]> =
-    | Type
-    | CaughtError<Throwables[number]>;
-
+export type CatchFunction = <E extends Err, R>(
+    err: E,
+    callback: (err: E) => R,
+) => CatchMetadata<E, R>;
 export type ThrowsFunction = <Task extends AnyFunction, Throwables extends Err[]>(
     task: Task,
     ...throwables: Throwables
