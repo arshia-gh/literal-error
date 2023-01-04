@@ -1,43 +1,11 @@
-export type Err = { name: string; message: string };
-
-export type AnyFunction = (...args: any[]) => any;
-
-export type CaughtError<E extends Err = Err> = {
-    throwable: E;
-    __isMarkedByThrows: boolean;
-};
-
-export type CatchFunction<E extends Err, R> = (
-    err: E,
-    callback: (err: E) => R,
-) => CatchMetadata<E, R>;
-
-export type CatchMetadata<E extends Err = Err, R = any> = {
-    throwable: E;
-    callback: (err: E) => R;
-    __isCatchMetadata: true;
-};
-
-export type UnsafeFunction<
-    Task extends AnyFunction = AnyFunction,
-    Throwables extends Err[] = Err[],
-> = (...args: Parameters<Task>) => UnsafeResult<ReturnType<Task>, Throwables>;
-
-export type UnsafeResult<Type = any, Throwables extends Err[] = Err[]> =
-    | Type
-    | CaughtError<Throwables[number]>;
-
-export type ToSafeResult<Result extends UnsafeResult> = Exclude<Result, CaughtError>;
-
-export type GetCaughtErrors<Result extends UnsafeResult> = Extract<Result, CaughtError>;
-
-export type GetThrowables<Result extends UnsafeResult> =
-    GetCaughtErrors<Result>['throwable'];
-
-export type ThrowsFunction = <Task extends AnyFunction, Throwables extends Err[]>(
-    task: Task,
-    ...throwables: Throwables
-) => UnsafeFunction<Task, Throwables>;
+import {
+    CatchMetadata,
+    CaughtError,
+    ThrowsFunction,
+    UnsafeResult,
+    AnyFunction,
+    Err,
+} from './types';
 
 export const throws: ThrowsFunction = <
     Task extends AnyFunction,
