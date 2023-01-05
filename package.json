@@ -6,6 +6,7 @@
     "types": "./build/cjs/types/index.d.ts",
     "scripts": {
         "clean": "rimraf ./build",
+        "test": "jest --verbose",
         "build:esm": "tsc --p ./tsconfig.esm.json",
         "build:cjs": "tsc --p ./tsconfig.cjs.json",
         "build": "npm run clean && npm run build:esm && npm run build:cjs",
