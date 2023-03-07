@@ -1,7 +1,7 @@
 # literal-error
 Create strongly typed errors with ease
 
-# Documentation
+## Documentation
 Although not necessary, before using `literal-error` we strongly suggest you to convert your errors to constant objects as demonstrated in below code:
 ```ts
 const NotAllowed = {
